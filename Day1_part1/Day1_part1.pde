@@ -62,10 +62,54 @@ public class Person
   int pc=0;
   int x=0, y=0;
   int oldx=0, oldy=0;
+  color c;
   
   public void draw()
   {
-    line(oldx,oldy,x,y);
+    int s=0,e=0,i=0,d=0;
+    
+    //stroke(255,0,0);
+    //line(oldx,oldy,x,y);
+    stroke(255,255,255);
+    
+    // vertical
+    if (oldx!=x)
+    {
+      s=oldx;
+      e=x;
+      d=oldx<x?1:-1;
+      
+      for (i=s;i!=e;i+=d)
+      {
+        println("point:"+i+","+y+" D="+d);
+        c=get(i+300,y+300);
+        if (c!=-16777216
+)
+        {
+          println("overlap found at:"+i+","+y+" C:"+c);
+          exit();
+        }
+        point(i,y);
+      }
+    }
+    else // horizontal
+    {
+      s=oldy;
+      e=y;
+      d=oldy<y?1:-1;
+      
+      for (i=s;i!=e;i+=d)
+      {
+        println("point:"+x+","+i+" D="+d);
+        c=get(x+300,i+300);
+        if (c!=-16777216)
+        {
+          println("overlap found at:"+x+","+i+" C:"+c);
+          exit();
+        }
+        point(x,i);
+      }
+    }
   }
   
   public Person(String program)
